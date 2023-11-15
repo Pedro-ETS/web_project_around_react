@@ -1,28 +1,28 @@
 {
   "files": {
-    "main.css": "/around-react_es/static/css/main.d134bb04.css",
-    "main.js": "/around-react_es/static/js/main.9b270625.js",
-    "static/js/787.3434f050.chunk.js": "/around-react_es/static/js/787.3434f050.chunk.js",
-    "static/media/Inter-SemiBold.woff": "/around-react_es/static/media/Inter-SemiBold.cca62d21c8c555c392e5.woff",
-    "static/media/Inter-Black.woff": "/around-react_es/static/media/Inter-Black.c6938660eec019fefd68.woff",
-    "static/media/Inter-Regular.woff": "/around-react_es/static/media/Inter-Regular.8c206db99195777c6769.woff",
-    "static/media/Inter-SemiBold.woff2": "/around-react_es/static/media/Inter-SemiBold.b5f0f109bc88052d4000.woff2",
-    "static/media/Inter-Black.woff2": "/around-react_es/static/media/Inter-Black.15ca31c0a2a68f76d2d1.woff2",
-    "static/media/Inter-Regular.woff2": "/around-react_es/static/media/Inter-Regular.c8ba52b05a9ef10f4758.woff2",
-    "static/media/Group.svg": "/around-react_es/static/media/Group.3826c074a1b94b101e38.svg",
-    "index.html": "/around-react_es/index.html",
-    "static/media/trash.svg": "/around-react_es/static/media/trash.917a5545a0029355175b.svg",
-    "static/media/EditButton.svg": "/around-react_es/static/media/EditButton.96026559fcd26131a4f7.svg",
-    "static/media/Like.svg": "/around-react_es/static/media/Like.cd25401f9019ef57ad3e.svg",
-    "static/media/CloseIcon.svg": "/around-react_es/static/media/CloseIcon.8b7229ca7ef0a72de20a.svg",
-    "static/media/btn-edit.svg": "/around-react_es/static/media/btn-edit.898c70be027d95f22fbe.svg",
-    "static/media/mas.svg": "/around-react_es/static/media/mas.68d7804cf3d4c584c14b.svg",
-    "main.d134bb04.css.map": "/around-react_es/static/css/main.d134bb04.css.map",
-    "main.9b270625.js.map": "/around-react_es/static/js/main.9b270625.js.map",
-    "787.3434f050.chunk.js.map": "/around-react_es/static/js/787.3434f050.chunk.js.map"
+    "main.css": "/web_project_around_react/static/css/main.82297042.css",
+    "main.js": "/web_project_around_react/static/js/main.34d3f477.js",
+    "static/js/787.3434f050.chunk.js": "/web_project_around_react/static/js/787.3434f050.chunk.js",
+    "static/media/Inter-SemiBold.woff": "/web_project_around_react/static/media/Inter-SemiBold.cca62d21c8c555c392e5.woff",
+    "static/media/Inter-Black.woff": "/web_project_around_react/static/media/Inter-Black.c6938660eec019fefd68.woff",
+    "static/media/Inter-Regular.woff": "/web_project_around_react/static/media/Inter-Regular.8c206db99195777c6769.woff",
+    "static/media/Inter-SemiBold.woff2": "/web_project_around_react/static/media/Inter-SemiBold.b5f0f109bc88052d4000.woff2",
+    "static/media/Inter-Black.woff2": "/web_project_around_react/static/media/Inter-Black.15ca31c0a2a68f76d2d1.woff2",
+    "static/media/Inter-Regular.woff2": "/web_project_around_react/static/media/Inter-Regular.c8ba52b05a9ef10f4758.woff2",
+    "static/media/Group.svg": "/web_project_around_react/static/media/Group.3826c074a1b94b101e38.svg",
+    "index.html": "/web_project_around_react/index.html",
+    "static/media/trash.svg": "/web_project_around_react/static/media/trash.917a5545a0029355175b.svg",
+    "static/media/EditButton.svg": "/web_project_around_react/static/media/EditButton.96026559fcd26131a4f7.svg",
+    "static/media/Like.svg": "/web_project_around_react/static/media/Like.cd25401f9019ef57ad3e.svg",
+    "static/media/CloseIcon.svg": "/web_project_around_react/static/media/CloseIcon.8b7229ca7ef0a72de20a.svg",
+    "static/media/btn-edit.svg": "/web_project_around_react/static/media/btn-edit.898c70be027d95f22fbe.svg",
+    "static/media/mas.svg": "/web_project_around_react/static/media/mas.68d7804cf3d4c584c14b.svg",
+    "main.82297042.css.map": "/web_project_around_react/static/css/main.82297042.css.map",
+    "main.34d3f477.js.map": "/web_project_around_react/static/js/main.34d3f477.js.map",
+    "787.3434f050.chunk.js.map": "/web_project_around_react/static/js/787.3434f050.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.d134bb04.css",
-    "static/js/main.9b270625.js"
+    "static/css/main.82297042.css",
+    "static/js/main.34d3f477.js"
   ]
 }
