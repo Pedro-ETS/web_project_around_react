@@ -3,14 +3,12 @@ import Header from "./components/Header";
 import Main from "./components/Main";
 import PopupWithForm from "./components/popupWithForm";
 import Footer from "./components/Footer";
-
 function App() {
   const [isEditProfilePopupOpen, setEditProfilePopupOpen] = useState(false);
   const [isAddPlacePopupOpen, setAddPlacePopupOpen] = useState(false);
   const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = useState(false);
   const [isConfirmationPopupOpen, setConfirmationPopupOpen] = useState(false);
   const [selectedCard, setSelectedCard] = useState(null);
-
   const handleEditProfileClick = () => setEditProfilePopupOpen(true);
   const handleAddPlaceClick = () => setAddPlacePopupOpen(true);
   const handleEditAvatarPopupOpenClick = () => setEditAvatarPopupOpen(true);
