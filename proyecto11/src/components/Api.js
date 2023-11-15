@@ -1,7 +1,7 @@
 export default class Api {
   constructor({ address, token, datos }) {
     this._url = address;
-    this._authorization = token;  //obtengo el
+    this._authorization = token; //obtengo el
     this._datos = datos;
   }
   getInitialCards() {
@@ -17,7 +17,6 @@ export default class Api {
       return Promise.reject(`Error: ${res.status}`);
     });
   }
-
   getUser() {
     return fetch(this._url, {
       headers: {

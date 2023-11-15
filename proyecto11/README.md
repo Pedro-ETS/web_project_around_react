@@ -1,4 +1,4 @@
-# Proyecto 10: Alrededor de los Estados Unidos
+# Proyecto 11: Alrededor de los Estados Unidos
 
 ### Descripción general
 *La funcionalidad de este proyecto es poner en práctica algunas de las tecnologías vistas hasta el momento, como las que mencionaré en adelante, son realmente útiles y necesarias. Agregamos unos links de enlacé, uno es la estructura del proyecto la cual esta en figma y el otro es el link donde desplegamos nuestra página.*
@@ -73,6 +73,6 @@ Estas funciones solo reciben y retornan, por eso tienen que utilizar React Hooks
 * [Enlace al proyecto en Figma](https://www.figma.com/file/LDMgqWesKpQkIwhOfEBuTS/WEB%2C-Sprint-5%3A-Around-The-U.S.-%7C-desktop-%2B-mobile?node-id=0%3A1)
 
 **Página Web**
-* [Proyecto de Netlify](https://pedro-ets.github.io/web_project_around_react/?)
+* [Enlace de proyecto](https://pedro-ets.github.io/web_project_around_react/?)
 
 

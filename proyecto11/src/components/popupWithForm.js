@@ -1,8 +1,5 @@
 import React from 'react';
-
-
 function PopupWithForm(props) {
-  
   return (
     <form name={props.name} className={`${props.name} ${props.isOpen ? `${props.name}_opened` : ''} `} novalidate>
     <div className={`${props.name}__container`}>
