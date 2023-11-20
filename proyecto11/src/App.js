@@ -22,7 +22,7 @@ function App() {
     setSelectedCard(null);
   };
   return (
-    <>
+    <> 
       <div className="page">
         <Header />
         <Main onEditProfileClick={handleEditProfileClick} onAddPlaceClick={handleAddPlaceClick} onEditAvatarClick={handleEditAvatarPopupOpenClick} ontrashCard={handleConfirmationPopupOpenClick} onCardClick={handleCardClick} cardStatus={selectedCard} onClose={closeAllPopups}/>

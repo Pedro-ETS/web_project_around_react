@@ -4,6 +4,7 @@ export default class Api {
     this._authorization = token; //obtengo el
     this._datos = datos;
   }
+  
   getInitialCards() {
     return fetch(this._url, {
       headers: {

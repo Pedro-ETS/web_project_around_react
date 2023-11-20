@@ -8,6 +8,7 @@ function Main({onEditProfileClick, onAddPlaceClick, onEditAvatarClick,ontrashCar
   const [userAvatar, setUserAvatar] = useState("");
   const [isHovered, setIsHovered] = useState(false);
   const [cards, setCards] = useState([]);
+  
   useEffect(() => {
     uownUser.getUser()// Llama a la API para obtener los datos del usuario cuando el componente se monta
       .then((data) => {// Configura los datos en las variables de estado
@@ -16,6 +17,7 @@ function Main({onEditProfileClick, onAddPlaceClick, onEditAvatarClick,ontrashCar
         setUserDescription(data.about);
         setUserAvatar(data.avatar);
       })
+      
       .catch((error) => {
         alert.error("Error al obtener datos del usuario:", error);
       });
