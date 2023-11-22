@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { uownUser, getCardsApi } from "../utils/api";
+import { userData, getCardsApi } from "../utils/api";
 import Card from "./Card";
 import ImagePopup from "./ImagePopup";
 function Main({onEditProfileClick, onAddPlaceClick, onEditAvatarClick,ontrashCard ,onCardClick, cardStatus, onClose}) {
@@ -10,9 +10,8 @@ function Main({onEditProfileClick, onAddPlaceClick, onEditAvatarClick,ontrashCar
   const [cards, setCards] = useState([]);
   
   useEffect(() => {
-    uownUser.getUser()// Llama a la API para obtener los datos del usuario cuando el componente se monta
+    userData.getUser()// Llama a la API para obtener los datos del usuario cuando el componente se monta
       .then((data) => {// Configura los datos en las variables de estado
-        console.log(data);
         setUserName(data.name);
         setUserDescription(data.about);
         setUserAvatar(data.avatar);
@@ -26,7 +25,6 @@ function Main({onEditProfileClick, onAddPlaceClick, onEditAvatarClick,ontrashCar
     getCardsApi
       .getInitialCards()
       .then((data) => {
-        console.log(data);
         setCards(data);
       })
       .catch((error) => {
