@@ -1,14 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useEffect} from "react";
 import Header from "./components/Header";
 import Main from "./components/Main";
 import PopupWithForm from "./components/popupWithForm";
 import Footer from "./components/Footer";
+import { userData } from "./utils/api.js";
+import  CurrentUserContext  from "./contexts/CurrentUserContext.js";
+
 function App() {
   const [isEditProfilePopupOpen, setEditProfilePopupOpen] = useState(false);
   const [isAddPlacePopupOpen, setAddPlacePopupOpen] = useState(false);
   const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = useState(false);
   const [isConfirmationPopupOpen, setConfirmationPopupOpen] = useState(false);
   const [selectedCard, setSelectedCard] = useState(null);
+  
+  const[currentUser , setCurrentUser] = useState(null);
+
   const handleEditProfileClick = () => setEditProfilePopupOpen(true);
   const handleAddPlaceClick = () => setAddPlacePopupOpen(true);
   const handleEditAvatarPopupOpenClick = () => setEditAvatarPopupOpen(true);
@@ -21,9 +27,21 @@ function App() {
     setConfirmationPopupOpen(false);
     setSelectedCard(null);
   };
+  useEffect(() => {
+    userData.getUser()// Llama a la API para obtener los datos del usuario cuando el componente se monta
+      .then((data) => {// Configura los datos en las variables de estado
+        setCurrentUser(data);
+      })
+      
+      .catch((error) => {
+        alert.error("Error al obtener datos del usuario:", error);
+      });
+  }, []); // aseguramos que se ejecute solo una vez al montar el componente
+
   return (
     <> 
       <div className="page">
+        <CurrentUserContext.Provider value={currentUser}>
         <Header />
         <Main onEditProfileClick={handleEditProfileClick} onAddPlaceClick={handleAddPlaceClick} onEditAvatarClick={handleEditAvatarPopupOpenClick} ontrashCard={handleConfirmationPopupOpenClick} onCardClick={handleCardClick} cardStatus={selectedCard} onClose={closeAllPopups}/>
         <PopupWithForm title="Edit profile" name="popup" namebutton="Guardar" isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} noValidate>
@@ -45,6 +63,8 @@ function App() {
         </PopupWithForm>
         <PopupWithForm title="¿Estás seguro?" name="popup-confirm-deletion" namebutton="si" isOpen={isConfirmationPopupOpen} onClose={closeAllPopups} noValidate/>
         <Footer/>
+        </CurrentUserContext.Provider>
+        
       </div>
     </>
   );
