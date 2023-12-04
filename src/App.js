@@ -4,7 +4,9 @@ import Main from "./components/Main";
 import PopupWithForm from "./components/popupWithForm";
 import Footer from "./components/Footer";
 import { userData } from "./utils/api.js";
+import EditProfilePopup from "./components/EditProfilePopup.js";
 import  CurrentUserContext  from "./contexts/CurrentUserContext.js";
+import Api from "./components/Api.js";
 
 function App() {
   const [isEditProfilePopupOpen, setEditProfilePopupOpen] = useState(false);
@@ -20,6 +22,7 @@ function App() {
   const handleEditAvatarPopupOpenClick = () => setEditAvatarPopupOpen(true);
   const handleConfirmationPopupOpenClick = () => setConfirmationPopupOpen(true);
   const handleCardClick = (cardData) => setSelectedCard(cardData);
+
   const closeAllPopups = () => {
     setEditProfilePopupOpen(false);
     setAddPlacePopupOpen(false);
@@ -27,6 +30,27 @@ function App() {
     setConfirmationPopupOpen(false);
     setSelectedCard(null);
   };
+
+  function handleUpdateUser(datos){
+    console.log(datos);
+    const editUserApi = new Api({
+      address: "https://around.nomoreparties.co/v1/web_es_09/users/me",
+      token: `33adefcc-a71e-4103-8764-faa4d26a6099`,
+      datos: {
+        about: datos.about,
+        name: datos.name,
+      },
+    });
+    editUserApi.setUserInfo()
+    .then((data) => {// Configura los datos en las variables de estado
+      setCurrentUser(data);
+      closeAllPopups();
+    })
+    .catch((error) => {
+      alert("Error al modificar los  datos del usuario:", error);
+    });
+  }
+
   useEffect(() => {
     userData.getUser()// Llama a la API para obtener los datos del usuario cuando el componente se monta
       .then((data) => {// Configura los datos en las variables de estado
@@ -43,13 +67,10 @@ function App() {
       <div className="page">
         <CurrentUserContext.Provider value={currentUser}>
         <Header />
-        <Main onEditProfileClick={handleEditProfileClick} onAddPlaceClick={handleAddPlaceClick} onEditAvatarClick={handleEditAvatarPopupOpenClick} ontrashCard={handleConfirmationPopupOpenClick} onCardClick={handleCardClick} cardStatus={selectedCard} onClose={closeAllPopups}/>
-        <PopupWithForm title="Edit profile" name="popup" namebutton="Guardar" isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} noValidate>
-          <input name="name" id="popup-name" className="popup__input" placeholder="Nombre" minlength={2} maxlength={40} required/>
-          <span className="popup__input-error popup-name-error"></span>
-          <input name="about" id="popup-descripcion" className="popup__input" placeholder="Acerca de mi" minlength={2} maxlength={200} required/>
-          <span className="popup__input-error popup-descripcion-error"></span>
-        </PopupWithForm>
+        <Main onEditProfileClick={handleEditProfileClick} onAddPlaceClick={handleAddPlaceClick} onEditAvatarClick={handleEditAvatarPopupOpenClick} ontrashCard={handleConfirmationPopupOpenClick} onCardClick={handleCardClick} cardStatus={selectedCard} onClose={closeAllPopups} onUpdateUser={handleUpdateUser}/>
+        
+        <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser}/> 
+        
         <PopupWithForm title="New place" name="popup-add" namebutton="Guardar" isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} noValidate>
           <input name="name" id="popup-add-name" className="popup-add__input" placeholder="Title" minlength={2} required/>
           <span className="popup-add__input-error popup-add-name-error"></span>
