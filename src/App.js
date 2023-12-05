@@ -5,6 +5,7 @@ import PopupWithForm from "./components/popupWithForm";
 import Footer from "./components/Footer";
 import { userData } from "./utils/api.js";
 import EditProfilePopup from "./components/EditProfilePopup.js";
+import EditAvatarPopup from "./components/EditAvatarPopup.js";
 import  CurrentUserContext  from "./contexts/CurrentUserContext.js";
 import Api from "./components/Api.js";
 
@@ -62,6 +63,25 @@ function App() {
       });
   }, []); // aseguramos que se ejecute solo una vez al montar el componente
 
+  function handleUpdateAvatar(data){
+    const editImgUser = new Api({
+      address: "https://around.nomoreparties.co/v1/web_es_09/users/me/avatar",
+      token: `33adefcc-a71e-4103-8764-faa4d26a6099`,
+      datos: {
+        avatar: data.avatar,
+      },
+    });  
+editImgUser.modifyImgUser()
+.then((res) => {
+  setCurrentUser(res);
+  closeAllPopups();
+})
+.catch((error) => {
+  alert("Error al modificar los  datos del usuario:", error);
+});
+  }
+
+
   return (
     <> 
       <div className="page">
@@ -71,6 +91,8 @@ function App() {
         
         <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser}/> 
         
+
+
         <PopupWithForm title="New place" name="popup-add" namebutton="Guardar" isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} noValidate>
           <input name="name" id="popup-add-name" className="popup-add__input" placeholder="Title" minlength={2} required/>
           <span className="popup-add__input-error popup-add-name-error"></span>
@@ -78,10 +100,10 @@ function App() {
             id="popup-add-descripcion" className="popup-add__input" placeholder="Imagen URL" required/>
           <span className="popup-add__input-error popup-add-descripcion-error"></span>
         </PopupWithForm>
-        <PopupWithForm title="Cambiar foto de perfil" name="popup-edit-img" namebutton="Guardar" isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} noValidate>
-          <input name="link" type="url" id="popup-edit-img-descripcion" className="popup-edit-img__input" placeholder="URL" required/>
-          <span className="popup-edit-img__input-error popup-edit-img-descripcion-error"></span>
-        </PopupWithForm>
+
+        <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar}/> 
+
+
         <PopupWithForm title="¿Estás seguro?" name="popup-confirm-deletion" namebutton="si" isOpen={isConfirmationPopupOpen} onClose={closeAllPopups} noValidate/>
         <Footer/>
         </CurrentUserContext.Provider>

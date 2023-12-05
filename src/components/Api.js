@@ -1,7 +1,7 @@
 export default class Api {
   constructor({ address, token, datos }) {
     this._url = address;
-    this._authorization = token; //obtengo el
+    this._authorization = token; 
     this._datos = datos;
   }
   
@@ -93,6 +93,22 @@ export default class Api {
       return Promise.reject(`Error: ${res.status}`);
     });
   }
- //generame una funcion que haga la peticion para actualizar like
+  modifyImgUser() {
+    return fetch(this._url, {
+      method: "PATCH",
+      body: JSON.stringify({
+        avatar: this._datos.avatar,
+      }),
+      headers: {
+        authorization: this._authorization,
+        "Content-Type": "application/json",
+      },
+    }).then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+      return Promise.reject(`Error: ${res.status}`);
+    });
+  }
   
 }

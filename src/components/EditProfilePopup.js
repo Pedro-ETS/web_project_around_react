@@ -26,9 +26,9 @@ function EditProfilePopup({isOpen,onClose,onUpdateUser}) {
     return (
         <div>
         <PopupWithForm title="Edit profile" name="popup" namebutton="Guardar" isOpen={isOpen} onClose={onClose} onSubmit={handleSubmit} >
-          <input name="name" id="popup-name" className="popup__input" placeholder="Nombre" minlength={2} maxlength={40} required onChange={ev => setName(ev.target.value)}/> 
+          <input name="name" id="popup-name" className="popup__input" placeholder="Nombre" minlength={2} maxlength={40} required value={name} onChange={ev => setName(ev.target.value)}/> 
           <span className="popup__input-error popup-name-error"></span>
-          <input name="about" id="popup-descripcion" className="popup__input" placeholder="Acerca de mi" minlength={2} maxlength={200} required onChange={ev => setDescription(ev.target.value)}/>
+          <input name="about" id="popup-descripcion" className="popup__input" placeholder="Acerca de mi" minlength={2} maxlength={200} required value={description} onChange={ev => setDescription(ev.target.value)}/>
           <span className="popup__input-error popup-descripcion-error"></span>
         </PopupWithForm>
             

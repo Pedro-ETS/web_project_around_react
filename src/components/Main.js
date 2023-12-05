@@ -18,7 +18,6 @@ function Main({
   const avatarUrl = currentUser && currentUser.avatar;
   const userName = currentUser && currentUser.name;
   const userDescription = currentUser && currentUser.about;
-
   const [isHovered, setIsHovered] = useState(false);
   const [cards, setCards] = useState([]);
 
@@ -42,7 +41,7 @@ function Main({
         console.log(data);
       })
       .catch((error) => {
-        alert.error("Error al obtener datos del usuario:", error);
+        alert("Error al obtener datos del usuario:", error);
       });
   }, []);
 
