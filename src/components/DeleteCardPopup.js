@@ -1,5 +1,5 @@
 import React from "react";
-import PopupWithForm from "./popupWithForm";
+import PopupWithForm from "./PopupWithForm";
 function DeleteCardPopup(props) {
   function handleSubmit(e) {
     e.preventDefault();

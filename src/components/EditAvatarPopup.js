@@ -1,5 +1,5 @@
 import React from "react";
-import PopupWithForm from "./popupWithForm";
+import PopupWithForm from "./PopupWithForm";
 function EditAvatarPopup(props) {
   const linkRef = React.useRef();
   function handleSubmit(e) {

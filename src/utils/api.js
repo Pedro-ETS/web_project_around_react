@@ -12,11 +12,6 @@ export const getCardsApi = new Api({
 });
 
 
-// const changeLikeCardStatus = new Api({
-//   address: "https://around.nomoreparties.co/v1/web_es_09/cards/likes/",
-//   token: `33adefcc-a71e-4103-8764-faa4d26a6099`,
-// });
-
 
 
 
