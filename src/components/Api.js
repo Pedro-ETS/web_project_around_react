@@ -18,6 +18,25 @@ export default class Api {
       return Promise.reject(`Error: ${res.status}`);
     });
   }
+  setCard() {
+    return fetch(this._url, {
+      method: "POST",
+      body: JSON.stringify({
+        link: this._datos.link,
+        name: this._datos.name,
+      }),
+      headers: {
+        authorization: this._authorization,
+        "Content-Type": "application/json",
+      },
+    }).then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+      return Promise.reject(`Error: ${res.status}`);
+    });
+  }
+
   getUser() {
     return fetch(this._url, {
       headers: {

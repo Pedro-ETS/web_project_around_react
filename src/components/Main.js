@@ -1,5 +1,4 @@
 import React, {  useState, useEffect } from "react";
-import { getCardsApi } from "../utils/api.js";
 import Card from "./Card";
 import ImagePopup from "./ImagePopup";
 import CurrentUserContext from "../contexts/CurrentUserContext";
@@ -9,17 +8,19 @@ function Main({
   onEditProfileClick,
   onAddPlaceClick,
   onEditAvatarClick,
-  ontrashCard,
-  onCardClick,
+  ontrashCard,                 
   cardStatus,
   onClose,
+  cards,
+  onCardLike,
+  onCardDelete
 }) {
   const currentUser = React.useContext(CurrentUserContext);
   const avatarUrl = currentUser && currentUser.avatar;
   const userName = currentUser && currentUser.name;
   const userDescription = currentUser && currentUser.about;
   const [isHovered, setIsHovered] = useState(false);
-  const [cards, setCards] = useState([]);
+ 
 
   // useEffect(() => {
   //   userData.getUser()// Llama a la API para obtener los datos del usuario cuando el componente se monta
@@ -33,42 +34,10 @@ function Main({
   //       alert.error("Error al obtener datos del usuario:", error);
   //     });
   // }, []); // aseguramos que se ejecute solo una vez al montar el componente
-  useEffect(() => {
-    getCardsApi
-      .getInitialCards()
-      .then((data) => {
-        setCards(data);
-        console.log(data);
-      })
-      .catch((error) => {
-        alert("Error al obtener datos del usuario:", error);
-      });
-  }, []);
 
-  function handleCardLike(card) {
-    const isLiked = card.likes.some((i) => i._id === currentUser._id); 
-    const api = new Api({
-      address: "https://around.nomoreparties.co/v1/web_es_09/cards/likes/"+card._id,
-      token: `33adefcc-a71e-4103-8764-faa4d26a6099`,
-      });
-    api.changeLikeCardStatus(!isLiked)
-    .then((newCard) => {
-      console.log(newCard);
-      console.log(card._id);
-      setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
-  });
-  }
+
   
-  function handleCardDelete(card) {
-    const deletCardApi = new Api({
-      address: "https://around.nomoreparties.co/v1/web_es_09/cards/" +card._id,
-      token: `33adefcc-a71e-4103-8764-faa4d26a6099`,
-    });
-    deletCardApi.deleteCard()
-    .then((data) => {
-      setCards((cards) => cards.filter((c) => c._id !== card._id));    
-  });
-  }
+  
 
   return (
     <main className="container">
@@ -113,9 +82,9 @@ function Main({
               name={card.name}
               ontrashCard={ontrashCard}
               owner={card.owner._id}
-              onCardLike={handleCardLike}
+              onCardLike={onCardLike}
               card={card}
-              onCardDelete={handleCardDelete}
+              onCardDelete={onCardDelete}
             />
           ))}
         </div>
