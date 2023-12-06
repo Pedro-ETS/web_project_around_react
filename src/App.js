@@ -2,29 +2,25 @@ import React, { useState, useEffect } from "react";
 import Header from "./components/Header";
 import Main from "./components/Main";
 import Footer from "./components/Footer";
-import { userData,getCardsApi } from "./utils/api.js";
+import { userData, getCardsApi } from "./utils/api.js";
 import EditProfilePopup from "./components/EditProfilePopup.js";
 import EditAvatarPopup from "./components/EditAvatarPopup.js";
 import AddPlacePopup from "./components/AddPlacePopup.js";
 import CurrentUserContext from "./contexts/CurrentUserContext.js";
 import Api from "./components/Api.js";
-
-
 function App() {
   const [isEditProfilePopupOpen, setEditProfilePopupOpen] = useState(false);
   const [isAddPlacePopupOpen, setAddPlacePopupOpen] = useState(false);
   const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = useState(false);
   const [isConfirmationPopupOpen, setConfirmationPopupOpen] = useState(false);
+  const [card, setCard] = useState(null);
   const [selectedCard, setSelectedCard] = useState(null);
   const [currentUser, setCurrentUser] = useState(null);
   const [cards, setCards] = useState([]);
-
   const handleEditProfileClick = () => setEditProfilePopupOpen(true);
   const handleAddPlaceClick = () => setAddPlacePopupOpen(true);
   const handleEditAvatarPopupOpenClick = () => setEditAvatarPopupOpen(true);
   const handleConfirmationPopupOpenClick = () => setConfirmationPopupOpen(true);
-  const handleCardClick = (cardData) => setSelectedCard(cardData);
-
   const closeAllPopups = () => {
     setEditProfilePopupOpen(false);
     setAddPlacePopupOpen(false);
@@ -32,7 +28,6 @@ function App() {
     setConfirmationPopupOpen(false);
     setSelectedCard(null);
   };
-
   function handleUpdateUser(datos) {
     console.log(datos);
     const editUserApi = new Api({
@@ -46,7 +41,6 @@ function App() {
     editUserApi
       .setUserInfo()
       .then((data) => {
-        // Configura los datos en las variables de estado
         setCurrentUser(data);
         closeAllPopups();
       })
@@ -54,19 +48,16 @@ function App() {
         alert("Error al modificar los  datos del usuario:", error);
       });
   }
-
   useEffect(() => {
     userData
-      .getUser() // Llama a la API para obtener los datos del usuario cuando el componente se monta
+      .getUser() 
       .then((data) => {
-        // Configura los datos en las variables de estado
         setCurrentUser(data);
       })
-
       .catch((error) => {
         alert.error("Error al obtener datos del usuario:", error);
       });
-  }, []); // aseguramos que se ejecute solo una vez al montar el componente
+  }, []); 
 
   useEffect(() => {
     getCardsApi
@@ -93,17 +84,6 @@ function App() {
       setCards((state) => state.map((c) => (c._id === card._id ? newCard : c)));
     });
   }
-
-  function handleCardDelete(card) {
-    const deletCardApi = new Api({
-      address: "https://around.nomoreparties.co/v1/web_es_09/cards/" + card._id,
-      token: `33adefcc-a71e-4103-8764-faa4d26a6099`,
-    });
-    deletCardApi.deleteCard().then((data) => {
-      setCards((cards) => cards.filter((c) => c._id !== card._id));
-    });
-  }
-  
   function handleUpdateAvatar(data) {
     const editImgUser = new Api({
       address: "https://around.nomoreparties.co/v1/web_es_09/users/me/avatar",
@@ -122,7 +102,6 @@ function App() {
         alert("Error al modificar los  datos del usuario:", error);
       });
   }
-
   function handleAddPlaceSubmit(formData) {
     const apiInsertCard = new Api({
       address: "https://around.nomoreparties.co/v1/web_es_09/cards",
@@ -132,15 +111,32 @@ function App() {
         name: formData.name,
       },
     });
-    apiInsertCard.setCard()
-    .then((res) => {
-      setCards((cards) => [res, ...cards]); 
-      closeAllPopups();
-    })
-    .catch((error) => {
-      alert("Error al agregar una nueva tarjeta:", error);
+    apiInsertCard
+      .setCard()
+      .then((res) => {
+        setCards((cards) => [res, ...cards]);
+        closeAllPopups();
+      })
+      .catch((error) => {
+        alert("Error al agregar una nueva tarjeta:", error);
+      });
+  }
+
+  function handleCardData(card) {
+    setCard(card);
+  }
+
+  function handleCardDelete() {
+    const deletCardApi = new Api({
+      address: "https://around.nomoreparties.co/v1/web_es_09/cards/" + card._id,
+      token: `33adefcc-a71e-4103-8764-faa4d26a6099`,
     });
-   
+    deletCardApi.deleteCard().then((data) => {
+      setCards((cards) => cards.filter((c) => c._id !== card._id));
+    });
+  }
+  function handleImgCardBig(link) {
+    setSelectedCard(link);
   }
 
   return (
@@ -153,13 +149,15 @@ function App() {
             onAddPlaceClick={handleAddPlaceClick}
             onEditAvatarClick={handleEditAvatarPopupOpenClick}
             ontrashCard={handleConfirmationPopupOpenClick}
-            onCardClick={handleCardClick}
             cardStatus={selectedCard}
+            oncardImg={handleImgCardBig}
             onClose={closeAllPopups}
             onUpdateUser={handleUpdateUser}
             cards={cards}
             onCardLike={handleCardLike}
-            onCardDelete={handleCardDelete}
+            statuspopupConfirmation={isConfirmationPopupOpen}
+            handleCardData={handleCardData}
+            handleCardDelete={handleCardDelete}
           />
           <EditProfilePopup
             isOpen={isEditProfilePopupOpen}
@@ -171,12 +169,11 @@ function App() {
             onClose={closeAllPopups}
             onUpdateAvatar={handleUpdateAvatar}
           />
-         <AddPlacePopup
+          <AddPlacePopup
             isOpen={isAddPlacePopupOpen}
             onClose={closeAllPopups}
-            onAddPlaceSubmit={handleAddPlaceSubmit} 
+            onAddPlaceSubmit={handleAddPlaceSubmit}
           />
-
           <Footer />
         </CurrentUserContext.Provider>
       </div>

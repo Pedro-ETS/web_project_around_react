@@ -1,10 +1,9 @@
 export default class Api {
   constructor({ address, token, datos }) {
     this._url = address;
-    this._authorization = token; 
+    this._authorization = token;
     this._datos = datos;
   }
-  
   getInitialCards() {
     return fetch(this._url, {
       headers: {
@@ -36,7 +35,6 @@ export default class Api {
       return Promise.reject(`Error: ${res.status}`);
     });
   }
-
   getUser() {
     return fetch(this._url, {
       headers: {
@@ -50,13 +48,13 @@ export default class Api {
       return Promise.reject(`Error: ${res.status}`);
     });
   }
- changeLikeCardStatus(isLiKed){
-    if(isLiKed){
+  changeLikeCardStatus(isLiKed) {
+    if (isLiKed) {
       return fetch(this._url, {
         method: "PUT",
         headers: {
           authorization: this._authorization,
-         "Content-Type": "application/json",
+          "Content-Type": "application/json",
         },
       }).then((res) => {
         if (res.ok) {
@@ -64,7 +62,7 @@ export default class Api {
         }
         return Promise.reject(`Error: ${res.status}`);
       });
-    }else{
+    } else {
       return fetch(this._url, {
         method: "DELETE",
         headers: {
@@ -78,7 +76,6 @@ export default class Api {
         return Promise.reject(`Error: ${res.status}`);
       });
     }
-
   }
   deleteCard() {
     return fetch(this._url, {
@@ -129,5 +126,4 @@ export default class Api {
       return Promise.reject(`Error: ${res.status}`);
     });
   }
-  
 }
