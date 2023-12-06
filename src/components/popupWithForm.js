@@ -1,5 +1,4 @@
 import React from 'react';
-//componente PopuppWithForm
 function PopupWithForm(props) {
   return (
     <form name={props.name} className={`${props.name} ${props.isOpen ? `${props.name}_opened` : ''} `} onSubmit={props.onSubmit} >
