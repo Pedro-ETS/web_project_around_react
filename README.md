@@ -69,6 +69,18 @@ Estas funciones solo reciben y retornan, por eso tienen que utilizar React Hooks
 21. **React Hooks** 
 - Los Hooks son funciones que te permiten “enganchar” el estado de React y el ciclo de vida desde componentes de función. Los hooks no funcionan dentro de las clases. Un Hook es una función de javascript que permite crear/acceder al estado y a los ciclos de vida de React, para asegurar la estabilidad de la aplicación
 
+23. **React Avanzado (Context)**
+- En React, el contexto (context) es una característica que permite pasar datos a través del árbol de componentes sin tener que pasar props manualmente en cada nivel. Esto es especialmente útil cuando tienes datos que son necesarios en varios componentes a diferentes niveles de anidamiento.
+
+24.  **Refs**
+- En React, "refs" es una abreviatura de "referencias" (en inglés, "refs"). Las referencias son un sistema que te permite acceder directamente a los nodos del DOM o a los componentes de React creados en tu aplicación. Se utilizan principalmente para interactuar con el DOM o para acceder a los métodos de un componente de React.
+
+25. **Estado de elevacion**
+- La elevación de estado en React es un patrón de diseño que le permite a los componentes compartir y modificar datos entre sí. En esencia, se trata de mover el estado de un componente a un ancestro común en la jerarquía de componentes
+
+26. **Componentes puros**
+- En React, los "componentes puros" se refieren a componentes que solo se basan en sus propiedades (props) y no tienen estado interno ni dependencias externas. Estos componentes son también conocidos como "componentes funcionales" o "componentes presentacionales". Solo se renderisan cuando sus props cambian 
+
 **Figma**
 * [Enlace al proyecto en Figma](https://www.figma.com/file/LDMgqWesKpQkIwhOfEBuTS/WEB%2C-Sprint-5%3A-Around-The-U.S.-%7C-desktop-%2B-mobile?node-id=0%3A1)
 

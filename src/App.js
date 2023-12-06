@@ -2,17 +2,18 @@ import React, { useState, useEffect } from "react";
 import Header from "./components/Header";
 import Main from "./components/Main";
 import Footer from "./components/Footer";
-import { userData, getCardsApi } from "./utils/api.js";
+import { userData, getCardsApi } from "./utils/api.js";  
 import EditProfilePopup from "./components/EditProfilePopup.js";
 import EditAvatarPopup from "./components/EditAvatarPopup.js";
 import AddPlacePopup from "./components/AddPlacePopup.js";
-import CurrentUserContext from "./contexts/CurrentUserContext.js";
+import CurrentUserContext, { dataUser } from "./contexts/CurrentUserContext.js";
 import Api from "./components/Api.js";
 function App() {
   const [isEditProfilePopupOpen, setEditProfilePopupOpen] = useState(false);
   const [isAddPlacePopupOpen, setAddPlacePopupOpen] = useState(false);
   const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = useState(false);
   const [isConfirmationPopupOpen, setConfirmationPopupOpen] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
   const [card, setCard] = useState(null);
   const [selectedCard, setSelectedCard] = useState(null);
   const [currentUser, setCurrentUser] = useState(null);
@@ -79,8 +80,6 @@ function App() {
       token: `33adefcc-a71e-4103-8764-faa4d26a6099`,
     });
     api.changeLikeCardStatus(!isLiked).then((newCard) => {
-      console.log(newCard);
-      console.log(card._id);
       setCards((state) => state.map((c) => (c._id === card._id ? newCard : c)));
     });
   }
@@ -139,10 +138,11 @@ function App() {
     setSelectedCard(link);
   }
 
+
   return (
     <>
       <div className="page">
-        <CurrentUserContext.Provider value={currentUser}>
+      <CurrentUserContext.Provider value={currentUser}>
           <Header />
           <Main
             onEditProfileClick={handleEditProfileClick}
@@ -158,6 +158,9 @@ function App() {
             statuspopupConfirmation={isConfirmationPopupOpen}
             handleCardData={handleCardData}
             handleCardDelete={handleCardDelete}
+            isHovered={isHovered}
+            setIsHovered={setIsHovered}
+
           />
           <EditProfilePopup
             isOpen={isEditProfilePopupOpen}
@@ -175,7 +178,7 @@ function App() {
             onAddPlaceSubmit={handleAddPlaceSubmit}
           />
           <Footer />
-        </CurrentUserContext.Provider>
+          </CurrentUserContext.Provider>
       </div>
     </>
   );

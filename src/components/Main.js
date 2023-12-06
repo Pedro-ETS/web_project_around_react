@@ -16,12 +16,14 @@ function Main({
   statuspopupConfirmation,
   handleCardData,
   handleCardDelete,
+  isHovered,
+  setIsHovered,
 }) {
   const currentUser = React.useContext(CurrentUserContext);
   const avatarUrl = currentUser && currentUser.avatar;
   const userName = currentUser && currentUser.name;
   const userDescription = currentUser && currentUser.about;
-  const [isHovered, setIsHovered] = useState(false);
+
   return (
     <main className="container">
       <section className="profile">
