@@ -16,8 +16,11 @@ function Card({
   const currentUser = useContext(CurrentUserContext);
   const isOwn = currentUser && owner === currentUser._id;
   const isLiked = currentUser && likes.some((i) => i._id === currentUser._id);
+
   const cardDeleteButtonClassName = `card__btn-trash ${isOwn ? "card__btn-trash_visible" : "card__btn-trash_hidden"}`;
+  
   const cardLikeButtonClassName = `card__btn-love ${isLiked ? "card__btn-love_activate" : ""}`;
+
   function handleLikeClick() {
     onCardLike(card);
   }

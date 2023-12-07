@@ -60,6 +60,7 @@ function Main({
           ))}
         </div>
         {cardStatus !== null ? (<ImagePopup selectedCard={cardStatus} onClose={onClose} />) : null}
+        
         {statuspopupConfirmation !== null ? (
           <DeleteCardPopup
             handleCardDelete={handleCardDelete}

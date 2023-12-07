@@ -4,8 +4,8 @@ export default class Api {
     this._authorization = token;
     this._datos = datos;
   }
-  getInitialCards() {
-    return fetch(this._url, {
+  getInitialCards(fullLink) {
+    return fetch(this._url+fullLink, {
       headers: {
         authorization: this._authorization,
         "Content-Type": "application/json",
@@ -17,12 +17,12 @@ export default class Api {
       return Promise.reject(`Error: ${res.status}`);
     });
   }
-  setCard() {
-    return fetch(this._url, {
+  setCard(fullLink,formData) {
+    return fetch(this._url+fullLink, {
       method: "POST",
       body: JSON.stringify({
-        link: this._datos.link,
-        name: this._datos.name,
+        link: formData.link,
+        name: formData.name,
       }),
       headers: {
         authorization: this._authorization,
@@ -35,8 +35,8 @@ export default class Api {
       return Promise.reject(`Error: ${res.status}`);
     });
   }
-  getUser() {
-    return fetch(this._url, {
+  getUser(fullLink) {
+    return fetch(this._url+fullLink, {
       headers: {
         authorization: this._authorization,
         "Content-Type": "application/json",
@@ -48,9 +48,9 @@ export default class Api {
       return Promise.reject(`Error: ${res.status}`);
     });
   }
-  changeLikeCardStatus(isLiKed) {
+  changeLikeCardStatus(isLiKed,fullLink,cardId) {
     if (isLiKed) {
-      return fetch(this._url, {
+      return fetch(this._url+fullLink+cardId, {
         method: "PUT",
         headers: {
           authorization: this._authorization,
@@ -63,7 +63,7 @@ export default class Api {
         return Promise.reject(`Error: ${res.status}`);
       });
     } else {
-      return fetch(this._url, {
+      return fetch(this._url+fullLink+cardId, {
         method: "DELETE",
         headers: {
           authorization: this._authorization,
@@ -77,8 +77,8 @@ export default class Api {
       });
     }
   }
-  deleteCard() {
-    return fetch(this._url, {
+  deleteCard(fullLink,cardId) {
+    return fetch(this._url+fullLink+cardId, {
       method: "DELETE",
       headers: {
         authorization: this._authorization,
@@ -91,12 +91,12 @@ export default class Api {
       return Promise.reject(`Error: ${res.status}`);
     });
   }
-  setUserInfo() {
-    return fetch(this._url, {
+  setUserInfo(fullLink,datos) {
+    return fetch(this._url+fullLink, {
       method: "PATCH",
       body: JSON.stringify({
-        about: this._datos.about,
-        name: this._datos.name,
+        about: datos.about,
+        name: datos.name,
       }),
       headers: {
         authorization: this._authorization,
@@ -109,11 +109,11 @@ export default class Api {
       return Promise.reject(`Error: ${res.status}`);
     });
   }
-  modifyImgUser() {
-    return fetch(this._url, {
+  modifyImgUser(fullLink,datos) {
+    return fetch(this._url+fullLink, {
       method: "PATCH",
       body: JSON.stringify({
-        avatar: this._datos.avatar,
+        avatar: datos.avatar,
       }),
       headers: {
         authorization: this._authorization,
