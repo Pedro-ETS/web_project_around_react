@@ -10,7 +10,8 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
   React.useEffect(() => {
     setName(nameUser || "");
     setDescription(aboutUser || "");
-  }, [currentUser]);
+  }, [currentUser,nameUser,aboutUser]);
+
   function handleSubmit(e) {
     e.preventDefault();
     onUpdateUser({
@@ -42,7 +43,7 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
         <span className="popup__input-error popup-name-error"></span>
         <input
           name="about"
-          id="popup-descripcion"
+          id="popup-description"
           className="popup__input"
           placeholder="Acerca de mi"
           minlength={2}

@@ -6,9 +6,7 @@ import api from "../utils/api.js";
 import EditProfilePopup from "./EditProfilePopup.js";
 import EditAvatarPopup from "./EditAvatarPopup.js";
 import AddPlacePopup from "./AddPlacePopup.js";
-import CurrentUserContext, {
-  dataUser,
-} from "../contexts/CurrentUserContext.js";
+import CurrentUserContext from "../contexts/CurrentUserContext.js";
 function App() {
   const [isEditProfilePopupOpen, setEditProfilePopupOpen] = useState(false);
   const [isAddPlacePopupOpen, setAddPlacePopupOpen] = useState(false);
@@ -19,6 +17,7 @@ function App() {
   const [selectedCard, setSelectedCard] = useState(null);
   const [currentUser, setCurrentUser] = useState(null);
   const [cards, setCards] = useState([]);
+
   const handleEditProfileClick = () => setEditProfilePopupOpen(true);
   const handleAddPlaceClick = () => setAddPlacePopupOpen(true);
   const handleEditAvatarPopupOpenClick = () => setEditAvatarPopupOpen(true);
@@ -30,8 +29,8 @@ function App() {
     setConfirmationPopupOpen(false);
     setSelectedCard(null);
   };
-  function handleUpdateUser(datos) {
-    api.setUserInfo("users/me", datos)
+  function handleUpdateUser(dataUser) {
+    api.setUserInfo("users/me", dataUser)
       .then((data) => {
         setCurrentUser(data);
         closeAllPopups();
@@ -60,18 +59,18 @@ function App() {
         alert("Error al obtener las tarjetas:", error);
       });
   }, []);
+
   function handleCardLike(card) {
     const isLiked = card.likes.some((i) => i._id === currentUser._id);
     api.changeLikeCardStatus(!isLiked, "cards/likes/", card._id)
       .then((newCard) => {
-        setCards((state) =>
-          state.map((c) => (c._id === card._id ? newCard : c))
-        );
-      })
+          setCards((state) => state.map((cardData) => (cardData._id === card._id ? newCard : cardData))); 
+      })  
       .catch((error) => {
         alert("Error no se pudo agregar el like o deslike", error);
       });
   }
+
   function handleUpdateAvatar(data) {
     api.modifyImgUser("users/me/avatar", data)
       .then((res) => {
